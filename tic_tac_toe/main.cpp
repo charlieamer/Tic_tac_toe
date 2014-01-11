@@ -20,10 +20,6 @@ int main()
 			//Help
 			displayHelp();
 			break;
-		case 3:
-			//Swap scores
-			swapScores();
-			break;
 		}
 	}
 }

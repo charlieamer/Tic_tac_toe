@@ -8,6 +8,7 @@ int gameFieldStatus[4][4];
 int score1 = 0, score2 = 0;
 char buffer[displayX][displayY];
 string name1, name2;
+int oddGame;
 #pragma endregion global_variables
 
 ////////////////////////////////////////////////////////////
@@ -27,16 +28,15 @@ void inputNames()
 int mainMenu()
 {
 	animateWindowIn(20, 14, 15);
-	animatedText(5, 2, "TIC", 40);
-	animatedText(9, 3, "TAC", 40);
-	animatedText(13, 4, "TOE", 40);
-	Sleep(200);
-	animatedText(2, 6, "(1) New game", 20);
-	animatedText(2, 7, "(2) Help", 20);
-	animatedText(2, 8, "(3) Swap scores", 20);
-	animatedText(2, 9, "(4)(Q)(ESC) Quit", 20);
-	animatedText(1, 11, name1 + ": " + int2str(score1), 10);
-	animatedText(1, 12, name2 + ": " + int2str(score2), 10);
+	animatedText(5, 2, "TIC", 30);
+	animatedText(9, 3, "TAC", 30);
+	animatedText(13, 4, "TOE", 30);
+	Sleep(150);
+	animatedText(2, 6, "(1) New game", 15);
+	animatedText(2, 7, "(2) Help", 15);
+	animatedText(2, 9, "(3)(Q)(ESC) Quit", 15);
+	animatedText(2, 10, name1 + ": " + int2str(score1), 10);
+	animatedText(2, 11, name2 + ": " + int2str(score2), 10);
 	bool work = true;
 	int toRet = 0;
 	while (work)
@@ -44,19 +44,18 @@ int mainMenu()
 		char c = _getch();
 		switch (c)
 		{
-		case '4':
+		case '3':
 		case 'q':
 		case 'Q':
 		case 27:
 			exit(0);
 		case '1':
 		case '2':
-		case '3':
 			work = false;
 			toRet = c - '0'; // Converts an ASCII character to an integer representation
 			break;
 		default:
-			drawText(2, 15, "Please press a number between 1 and 4");
+			drawText(2, 15, "Please press a number between 1 and 3");
 			drawBuffer();
 		}
 	}
@@ -144,7 +143,9 @@ void drawGameTable(int playerID, bool drawInfo)
 		for (int j = 0; j < 3; j++)
 		{
 			fieldCoordinate(i, j, tx, ty);
-			switch (gameFieldStatus[i][j])
+			int stat = gameFieldStatus[i][j];
+			if (oddGame && gameFieldStatus[i][j]) stat=(!(gameFieldStatus[i][j]-1))+1;
+			switch (stat)
 			{
 			case 0:
 				buffer[tx][ty] = (j * 3) + i + '1';
@@ -168,7 +169,7 @@ void drawGameTable(int playerID, bool drawInfo)
 	if (drawInfo)
 	{
 		drawText(1, 14, "Select a field where to play. Press Q or ESC to quit");
-		drawText(1, 15, ((playerID == 0) ? name1 : name2) + "'s turn (playing as '" + ((playerID == 0) ? "X" : "O") + "')");
+		drawText(1, 15, ((playerID == 0) ? name1 : name2) + "'s turn (playing as '" + ((playerID ^ oddGame == 0) ? "X" : "O") + "')");
 	}
 	drawBuffer(10);
 }
@@ -183,7 +184,7 @@ int gameBase()
 		}
 	}
 	animateWindowIn(19, 13, 10);
-	int playerID = 1;
+	int playerID = !oddGame;
 	bool toUpdate = true;
 	int setX = 3, setY = 3;
 	while (true)
@@ -235,6 +236,7 @@ void playGame()
 	{
 		animatedText(2, 15, "Better luck next time ;)", 20);
 	}
+	oddGame = !oddGame;
 	Sleep(700);
 	animateWindowOut(19, 13, 10);
 }
