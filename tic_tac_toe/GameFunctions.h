@@ -2,6 +2,9 @@
 #include "Utilities.h"
 #include <conio.h>
 
+// prompts for name
+void inputNames();
+
 // draws and controls main menu
 int mainMenu();
 

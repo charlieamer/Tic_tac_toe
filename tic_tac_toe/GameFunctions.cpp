@@ -7,12 +7,23 @@
 int gameFieldStatus[4][4];
 int score1 = 0, score2 = 0;
 char buffer[displayX][displayY];
+string name1, name2;
 #pragma endregion global_variables
 
 ////////////////////////////////////////////////////////////
 /// GAME FUNCTIONS
 ////////////////////////////////////////////////////////////
 #pragma region game_functions
+
+void inputNames()
+{
+	cout << "Input your name (player 1): ";
+	cin >> name1;
+	cout << "Input oponnent's name (player 2): ";
+	cin >> name2;
+	system("cls");
+}
+
 int mainMenu()
 {
 	animateWindowIn(20, 14, 15);
@@ -24,11 +35,8 @@ int mainMenu()
 	animatedText(2, 7, "(2) Help", 20);
 	animatedText(2, 8, "(3) Swap scores", 20);
 	animatedText(2, 9, "(4)(Q)(ESC) Quit", 20);
-	if (score1 || score2)
-	{
-		animatedText(1, 11, "Player 1 score: " + int2str(score1), 10);
-		animatedText(1, 12, "Player 2 score: " + int2str(score2), 10);
-	}
+	animatedText(1, 11, name1 + ": " + int2str(score1), 10);
+	animatedText(1, 12, name2 + ": " + int2str(score2), 10);
 	bool work = true;
 	int toRet = 0;
 	while (work)
@@ -160,7 +168,7 @@ void drawGameTable(int playerID, bool drawInfo)
 	if (drawInfo)
 	{
 		drawText(1, 14, "Select a field where to play. Press Q or ESC to quit");
-		drawText(1, 15, "Player " + int2str(playerID + 1) + " (playing as '" + ((playerID == 0) ? "X" : "O") + "')");
+		drawText(1, 15, ((playerID == 0) ? name1 : name2) + "'s turn (playing as '" + ((playerID == 0) ? "X" : "O") + "')");
 	}
 	drawBuffer(10);
 }

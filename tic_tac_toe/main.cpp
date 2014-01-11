@@ -7,6 +7,7 @@
 #pragma region main
 int main()
 {
+	inputNames();
 	while (true)
 	{
 		switch (mainMenu())
