@@ -10,6 +10,15 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\GameFunctions.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\Utilities.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\GameFunctions.h" />
+    <ClInclude Include="..\src\Utilities.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B19A879F-9753-4593-969F-38FBFC7CFB88}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -41,9 +50,17 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>../exe</OutDir>
+    <TargetName>$(ProjectName)_$(Configuration)</TargetName>
+    <IncludePath>../poco-1.4.6p2/foundation/include;../poco-1.4.6p2/net/include;$(IncludePath)</IncludePath>
+    <LibraryPath>../poco-1.4.6p2/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>../exe</OutDir>
+    <TargetName>$(ProjectName)_$(Configuration)</TargetName>
+    <IncludePath>../poco-1.4.6p2/foundation/include;../poco-1.4.6p2/net/include;$(IncludePath)</IncludePath>
+    <LibraryPath>../poco-1.4.6p2/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -53,6 +70,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -69,6 +87,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -77,15 +96,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\tic_tac_toe\GameFunctions.cpp" />
-    <ClCompile Include="..\tic_tac_toe\main.cpp" />
-    <ClCompile Include="..\tic_tac_toe\Utilities.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\tic_tac_toe\GameFunctions.h" />
-    <ClInclude Include="..\tic_tac_toe\Utilities.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

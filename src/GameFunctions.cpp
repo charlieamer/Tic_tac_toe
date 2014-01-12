@@ -3,6 +3,7 @@
 #define POCO_STATIC
 #include <Poco/Net/TCPServer.h>
 #include <Poco/Net/TCPServerConnection.h>
+#include <Poco/Net/NetException.h>
 
 ////////////////////////////////////////////////////////////
 /// GLOBAL VARIABLES
@@ -12,7 +13,11 @@ int gameFieldStatus[4][4];
 int score1 = 0, score2 = 0;
 char buffer[displayX][displayY];
 string name1, name2;
-int oddGame;
+unsigned char oddGame = 0;
+int netReady; // 0 - no, 1 - recieve, 2 - send
+unsigned char netChar;
+Poco::Net::TCPServer* server;
+Poco::Net::StreamSocket* client;
 #pragma endregion global_variables
 
 ////////////////////////////////////////////////////////////
@@ -24,48 +29,79 @@ class HostConnection :public Poco::Net::TCPServerConnection
 {
 public:
 	HostConnection(const Poco::Net::StreamSocket &s) : Poco::Net::TCPServerConnection(s) {};
-	char getChar(Poco::Net::StreamSocket &socket)
+	unsigned char getChar()
 	{
-		unsigned char buffer[1];
-		socket.receiveBytes(buffer, 1);
+		unsigned char buffer[1] = {'q'};
+		socket().receiveBytes(buffer, 1);
+		if (buffer[0] == 255) socket().close();
 		return buffer[0];
 	}
+
+	void sendChar(unsigned char c)
+	{
+		unsigned char buffer[1];
+		buffer[0] = c;
+		socket().sendBytes(buffer,1);
+	}
+
 	void run()
 	{
-		Poco::Net::StreamSocket &socket = this->socket();
-		try
+		sendChar(oddGame);
+		for (;;)
 		{
-			for (;;)
+			if (netReady == 1)
 			{
-				char c = getChar(socket);
-				drawText(20, 2, "Recieved byte: " + c);
-				drawBuffer();
-				if (c == 'q')
-					break;
+				netChar = getChar();
+				netReady = 0;
 			}
+			if (netReady == 2)
+			{
+				sendChar(netChar);
+				netReady = 0;
+			}
+			Sleep(100);
 		}
-		catch (Poco::Exception &ex)
-		{
-			drawText(21, 2, "Internet error: " + ex.message());
-			drawBuffer();
-		}
-		socket.close();
+		socket().close();
 	}
 };
 
 void connectToServer()
 {
-
+	animateWindowIn(30, 6, 15);
+	drawText(2, 2, "IP: ");
+	drawBuffer();
+	string ip;
+	string port;
+	cin >> ip;
+	drawText(2, 3, "Port: ");
+	drawBuffer();
+	cin >> port;
+	const Poco::Net::SocketAddress address(ip + ":" + port);
+	client = new Poco::Net::StreamSocket(address);
+	client->receiveBytes(&oddGame, 1);
+	animateWindowOut(30, 6, 15);
+	playGame(2);
 }
 
 void hostServer()
 {
-	Poco::Net::ServerSocket socket(8080);
-	Poco::Net::TCPServer server(new Poco::Net::TCPServerConnectionFactoryImpl<HostConnection>(), socket);
-	server.start();
-	while (server.currentConnections() == 0) Sleep(100);
-	while (server.currentConnections() == 1) Sleep(100);
-	server.stop();
+	Poco::Net::TCPServerParams *serverParams = new Poco::Net::TCPServerParams();
+	serverParams->setMaxQueued(1);
+	serverParams->setMaxThreads(1);
+	Poco::Net::ServerSocket srvsocket(8080);
+	server = new Poco::Net::TCPServer(new Poco::Net::TCPServerConnectionFactoryImpl<HostConnection>(), srvsocket, serverParams);
+	server->start();
+	animateWindowIn(14, 5, 15);
+	drawText(2, 2, "Waiting...");
+	drawBuffer();
+	while (server->currentConnections() == 0)
+	{
+		Sleep(100);
+	}
+	animateWindowOut(14, 5, 15);
+	playGame(1);
+	srvsocket.close();
+	delete server;
 }
 #pragma endregion internet_functions
 
@@ -74,13 +110,38 @@ void hostServer()
 ////////////////////////////////////////////////////////////
 #pragma region game_functions
 
-void inputNames()
+char gameInput(int mode, int playerID)
 {
+	if (mode == 0 || (mode == 1 && playerID == 0) || (mode == 2 && playerID == 1))
+	{
+		char c = _getch();
+		return c;
+	}
+	if (mode == 1)
+	{
+		netChar = 0;
+		netReady = 1;
+		while (netReady && netChar==0) Sleep(100);
+		return netChar;
+	}
+	if (mode == 2)
+	{
+		char c = 27;
+		client->receiveBytes(&c,1);
+		return c;
+	}
+}
+
+void inputNames()
+{/*
 	cout << "Input your name (player 1): ";
 	cin >> name1;
 	cout << "Input oponnent's name (player 2): ";
 	cin >> name2;
 	system("cls");
+	*/
+	name1 = "Amer";
+	name2 = "Muamera";
 }
 
 int mainMenu()
@@ -236,7 +297,7 @@ void drawGameTable(int playerID, bool drawInfo)
 	drawBuffer(10);
 }
 
-int gameBase()
+int gameBase(int mode)
 {
 	for (int i = 0; i < 3; i++)
 	{
@@ -264,7 +325,7 @@ int gameBase()
 			playerID = !playerID;
 			drawGameTable(playerID);
 		}
-		char c = _getch();
+		char c = gameInput(mode, playerID);
 		if (c == 'Q' || c == 'q' || c == 27) return 0;
 		toUpdate = true;
 		if (c < '1' || c > '9')
@@ -281,14 +342,25 @@ int gameBase()
 				drawText(1, 19, "That field is already used");
 				drawBuffer();
 				toUpdate = false;
+			} else
+			{
+				if (mode == 1 && playerID == 0)
+				{
+					netChar = c;
+					netReady = 2;
+				}
+				if (mode == 2 && playerID == 1)
+				{
+					client->sendBytes(&c, 1);
+				}
 			}
 		}
 	}
 }
 
-void playGame()
+void playGame(int mode)
 {
-	int winner = gameBase();
+	int winner = gameBase(mode);
 	drawGameTable(0, false);
 	if (winner != 0)
 	{
