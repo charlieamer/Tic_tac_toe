@@ -53,15 +53,15 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\exe\</OutDir>
     <TargetName>$(ProjectName)_$(Configuration)</TargetName>
-    <IncludePath>../include;$(IncludePath)</IncludePath>
-    <LibraryPath>../lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>../poco-1.4.6p2/net/include;../poco-1.4.6p2/foundation/include;$(IncludePath)</IncludePath>
+    <LibraryPath>../poco-1.4.6p2/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>..\exe\</OutDir>
     <TargetName>$(ProjectName)_$(Configuration)</TargetName>
-    <IncludePath>../include;$(IncludePath)</IncludePath>
-    <LibraryPath>../lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>../poco-1.4.6p2/net/include;../poco-1.4.6p2/foundation/include;$(IncludePath)</IncludePath>
+    <LibraryPath>../poco-1.4.6p2/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
