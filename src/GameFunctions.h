@@ -22,7 +22,7 @@ int checkGame();
 // Draws game table, displaying which player is currently
 // playing, it has also option if you want to display
 // additional game info
-void drawGameTable(int playerID, bool drawInfo = true);
+void drawGameTable(int playerID, bool drawInfo = true, bool invertSign = false);
 
 // Controls game logic and input, returns which user won.
 // If it is tie, or user quit, it returns 0

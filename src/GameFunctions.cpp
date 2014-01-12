@@ -16,6 +16,7 @@ string name1, name2;
 unsigned char oddGame = 0;
 int netReady; // 0 - no, 1 - recieve, 2 - send
 unsigned char netChar;
+string lastIp, lastPort;
 Poco::Net::TCPServer* server;
 Poco::Net::StreamSocket* client;
 #pragma endregion global_variables
@@ -67,19 +68,26 @@ public:
 
 void connectToServer()
 {
-	animateWindowIn(30, 6, 15);
-	drawText(2, 2, "IP: ");
+	animateWindowIn(34, 7, 15);
+	drawText(2, 2, "Press enter to use last values");
+	drawBuffer();
+	drawText(2, 3, "IP: ");
 	drawBuffer();
 	string ip;
 	string port;
-	cin >> ip;
-	drawText(2, 3, "Port: ");
+	getline(cin, ip);
+	getline(cin, ip);
+	if (ip=="") ip = lastIp;
+	drawText(2, 4, "Port: ");
 	drawBuffer();
-	cin >> port;
+	getline(cin, port);
+	if (port == "") port = lastPort;
+	lastPort = port;
+	lastIp = ip;
 	const Poco::Net::SocketAddress address(ip + ":" + port);
 	client = new Poco::Net::StreamSocket(address);
 	client->receiveBytes(&oddGame, 1);
-	animateWindowOut(30, 6, 15);
+	animateWindowOut(34, 6, 15);
 	playGame(2);
 }
 
@@ -133,15 +141,13 @@ char gameInput(int mode, int playerID)
 }
 
 void inputNames()
-{/*
+{
 	cout << "Input your name (player 1): ";
 	cin >> name1;
 	cout << "Input oponnent's name (player 2): ";
 	cin >> name2;
 	system("cls");
-	*/
-	name1 = "Amer";
-	name2 = "Muamera";
+	
 }
 
 int mainMenu()
@@ -226,7 +232,7 @@ int checkGame()
 	return 0;
 }
 
-void drawGameTable(int playerID, bool drawInfo)
+void drawGameTable(int playerID, bool drawInfo, bool invertSign)
 {
 	clearBuffer();
 	drawWindow(19, 13);
@@ -292,7 +298,7 @@ void drawGameTable(int playerID, bool drawInfo)
 	if (drawInfo)
 	{
 		drawText(1, 14, "Select a field where to play. Press Q or ESC to quit");
-		drawText(1, 15, ((playerID == 0) ? name1 : name2) + "'s turn (playing as '" + ((playerID ^ oddGame == 0) ? "X" : "O") + "')");
+		drawText(1, 15, ((playerID == 0) ? name1 : name2) + "'s turn (playing as '" + ((playerID ^ oddGame ^ invertSign == 0) ? "X" : "O") + "')");
 	}
 	drawBuffer(10);
 }
@@ -323,7 +329,7 @@ int gameBase(int mode)
 				return g;
 			}
 			playerID = !playerID;
-			drawGameTable(playerID);
+			drawGameTable(playerID ^ (mode == 2), true, mode == 2);
 		}
 		char c = gameInput(mode, playerID);
 		if (c == 'Q' || c == 'q' || c == 27) return 0;
@@ -361,6 +367,10 @@ int gameBase(int mode)
 void playGame(int mode)
 {
 	int winner = gameBase(mode);
+	if (winner)
+	{
+		if (mode == 2) winner = (!(winner-1))+1;
+	}
 	drawGameTable(0, false);
 	if (winner != 0)
 	{
