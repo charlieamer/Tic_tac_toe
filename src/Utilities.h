@@ -1,12 +1,20 @@
 #pragma once
+#define _WINSOCKAPI_
 #include <Windows.h>
 #include <string>
 #include <iostream>
+#pragma warning(disable:4309)
 using namespace std;
 
 // Display Width and Height
 #define displayX 60
 #define displayY 20
+
+// connect to the server (online game)
+void connectToServer();
+
+// host a server (online game)
+void hostServer();
 
 // puts a cursor to a given location
 void gotoxy(int x, int y);

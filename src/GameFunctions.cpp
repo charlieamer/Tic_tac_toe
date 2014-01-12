@@ -1,5 +1,9 @@
 #include "GameFunctions.h"
 
+#define POCO_STATIC
+#include <Poco/Net/TCPServer.h>
+#include <Poco/Net/TCPServerConnection.h>
+
 ////////////////////////////////////////////////////////////
 /// GLOBAL VARIABLES
 ////////////////////////////////////////////////////////////
@@ -10,6 +14,60 @@ char buffer[displayX][displayY];
 string name1, name2;
 int oddGame;
 #pragma endregion global_variables
+
+////////////////////////////////////////////////////////////
+/// INTERNET FUNCTIONS
+////////////////////////////////////////////////////////////
+#pragma region internet_functions
+
+class HostConnection :public Poco::Net::TCPServerConnection
+{
+public:
+	HostConnection(const Poco::Net::StreamSocket &s) : Poco::Net::TCPServerConnection(s) {};
+	char getChar(Poco::Net::StreamSocket &socket)
+	{
+		unsigned char buffer[1];
+		socket.receiveBytes(buffer, 1);
+		return buffer[0];
+	}
+	void run()
+	{
+		Poco::Net::StreamSocket &socket = this->socket();
+		try
+		{
+			for (;;)
+			{
+				char c = getChar(socket);
+				drawText(20, 2, "Recieved byte: " + c);
+				drawBuffer();
+				if (c == 'q')
+					break;
+			}
+		}
+		catch (Poco::Exception &ex)
+		{
+			drawText(21, 2, "Internet error: " + ex.message());
+			drawBuffer();
+		}
+		socket.close();
+	}
+};
+
+void connectToServer()
+{
+
+}
+
+void hostServer()
+{
+	Poco::Net::ServerSocket socket(8080);
+	Poco::Net::TCPServer server(new Poco::Net::TCPServerConnectionFactoryImpl<HostConnection>(), socket);
+	server.start();
+	while (server.currentConnections() == 0) Sleep(100);
+	while (server.currentConnections() == 1) Sleep(100);
+	server.stop();
+}
+#pragma endregion internet_functions
 
 ////////////////////////////////////////////////////////////
 /// GAME FUNCTIONS
@@ -34,9 +92,11 @@ int mainMenu()
 	Sleep(150);
 	animatedText(2, 6, "(1) New game", 15);
 	animatedText(2, 7, "(2) Help", 15);
-	animatedText(2, 9, "(3)(Q)(ESC) Quit", 15);
-	animatedText(2, 10, name1 + ": " + int2str(score1), 10);
-	animatedText(2, 11, name2 + ": " + int2str(score2), 10);
+	animatedText(2, 8, "(3) Connect", 15);
+	animatedText(2, 9, "(4) Host", 15);
+	animatedText(2, 10, "(5)(Q)(ESC) Quit", 15);
+	animatedText(2, 11, name1 + ": " + int2str(score1), 10);
+	animatedText(2, 12, name2 + ": " + int2str(score2), 10);
 	bool work = true;
 	int toRet = 0;
 	while (work)
@@ -44,18 +104,20 @@ int mainMenu()
 		char c = _getch();
 		switch (c)
 		{
-		case '3':
+		case '5':
 		case 'q':
 		case 'Q':
 		case 27:
 			exit(0);
 		case '1':
 		case '2':
+		case '3':
+		case '4':
 			work = false;
 			toRet = c - '0'; // Converts an ASCII character to an integer representation
 			break;
 		default:
-			drawText(2, 15, "Please press a number between 1 and 3");
+			drawText(2, 15, "Please press a number between 1 and 5");
 			drawBuffer();
 		}
 	}
