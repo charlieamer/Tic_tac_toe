@@ -15,21 +15,21 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\tic_tac_toe\GameFunctions.cpp">
+    <ClCompile Include="..\src\GameFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\tic_tac_toe\main.cpp">
+    <ClCompile Include="..\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\tic_tac_toe\Utilities.cpp">
+    <ClCompile Include="..\src\Utilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\tic_tac_toe\GameFunctions.h">
+    <ClInclude Include="..\src\GameFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\tic_tac_toe\Utilities.h">
+    <ClInclude Include="..\src\Utilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

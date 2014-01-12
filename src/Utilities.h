@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <string>
 #include <iostream>
+#pragma warning(disable:4309)
 using namespace std;
 
 // Display Width and Height
