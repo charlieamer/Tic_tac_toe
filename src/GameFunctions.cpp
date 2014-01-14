@@ -75,7 +75,9 @@ void connectToServer()
 	drawBuffer();
 	string ip;
 	string port;
+#ifdef _WIN32 || _WIN64
 	getline(cin, ip);
+#endif
 	getline(cin, ip);
 	if (ip=="") ip = lastIp;
 	drawText(2, 4, "Port: ");
@@ -94,11 +96,18 @@ void connectToServer()
 void hostServer()
 {
 	Poco::Net::TCPServerParams *serverParams = new Poco::Net::TCPServerParams();
-	serverParams->setMaxQueued(1);
-	serverParams->setMaxThreads(1);
+	serverParams->setMaxQueued(20);
+	serverParams->setMaxThreads(21);
 	Poco::Net::ServerSocket srvsocket(8080);
 	server = new Poco::Net::TCPServer(new Poco::Net::TCPServerConnectionFactoryImpl<HostConnection>(), srvsocket, serverParams);
+	try
+	{
 	server->start();
+	} catch (Poco::SystemException &ex)
+	{
+    cout << ex.displayText() << endl;
+    ex.rethrow();
+	}
 	animateWindowIn(14, 5, 15);
 	drawText(2, 2, "Waiting...");
 	drawBuffer();
@@ -147,7 +156,7 @@ void inputNames()
 	cout << "Input oponnent's name (player 2): ";
 	cin >> name2;
 	system("cls");
-	
+
 }
 
 int mainMenu()

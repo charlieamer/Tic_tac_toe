@@ -6,29 +6,10 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="Debug">
-				<Option output="../lib/libPocoNetmtd.a" prefix_auto="0" extension_auto="0" />
-				<Option object_output="obj/Debug" />
-				<Option type="2" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-DWIN32" />
-					<Add option="-D_WINDOWS" />
-					<Add option="-D_USRDLL" />
-					<Add option="-DPOCO_STATIC" />
-					<Add option="-DNet_EXPORTS" />
-					<Add option="-DWINVER=0x0500" />
-					<Add option="-DPOCO_NO_FPENVIRONMENT" />
-					<Add option="-D_DEBUG" />
-					<Add directory="include" />
-					<Add directory="../Foundation/include" />
-				</Compiler>
-				<Linker>
-					<Add option="-s" />
-				</Linker>
-			</Target>
-			<Target title="Release">
+			<Target title="Windows">
+				<Option platforms="Windows;" />
 				<Option output="../lib/libPocoNetmt.a" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
 				<Option object_output="obj/Release" />
 				<Option type="2" />
 				<Option compiler="gcc" />
@@ -47,374 +28,212 @@
 					<Add option="-s" />
 				</Linker>
 			</Target>
+			<Target title="Linux">
+				<Option platforms="Unix;" />
+				<Option output="../lib/libPocoNetmt.a" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="obj/Release" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-D_USRDLL" />
+					<Add option="-DPOCO_STATIC" />
+					<Add option="-DNet_EXPORTS" />
+					<Add option="-DPOCO_NO_FPENVIRONMENT" />
+					<Add directory="include" />
+					<Add directory="../Foundation/include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
 		</Build>
-		<Unit filename="include/Poco/Net/AbstractHTTPRequestHandler.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/DatagramSocket.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/DatagramSocketImpl.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/DialogSocket.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/DNS.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/FilePartSource.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/FTPClientSession.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/FTPStreamFactory.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HostEntry.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTMLForm.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPAuthenticationParams.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPBasicCredentials.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPBasicStreamBuf.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPBufferAllocator.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPChunkedStream.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPClientSession.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPCookie.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPCredentials.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPDigestCredentials.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPFixedLengthStream.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPHeaderStream.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPIOStream.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPMessage.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPRequest.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPRequestHandler.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPRequestHandlerFactory.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPResponse.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPServer.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPServerConnection.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPServerConnectionFactory.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPServerParams.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPServerRequest.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPServerRequestImpl.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPServerResponse.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPServerResponseImpl.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPServerSession.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPSession.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPSessionFactory.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPSessionInstantiator.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPStream.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/HTTPStreamFactory.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/ICMPClient.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/ICMPEventArgs.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/ICMPPacket.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/ICMPPacketImpl.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/ICMPSocket.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/ICMPSocketImpl.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/ICMPv4PacketImpl.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/IPAddress.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/MailMessage.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/MailRecipient.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/MailStream.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/MediaType.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/MessageHeader.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/MulticastSocket.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/MultipartReader.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/MultipartWriter.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/NameValueCollection.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/Net.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/NetException.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/NetworkInterface.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/NullPartHandler.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/PartHandler.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/PartSource.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/POP3ClientSession.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/QuotedPrintableDecoder.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/QuotedPrintableEncoder.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/RawSocket.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/RawSocketImpl.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/RemoteSyslogChannel.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/RemoteSyslogListener.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/ServerSocket.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/ServerSocketImpl.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/SMTPClientSession.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/Socket.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/SocketAcceptor.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/SocketAddress.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/SocketConnector.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/SocketDefs.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/SocketImpl.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/SocketNotification.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/SocketNotifier.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/SocketReactor.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/SocketStream.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/StreamSocket.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/StreamSocketImpl.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/StringPartSource.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/TCPServer.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/TCPServerConnection.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/TCPServerConnectionFactory.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/TCPServerDispatcher.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/TCPServerParams.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/WebSocket.h">
-		</Unit>
-		<Unit filename="include/Poco/Net/WebSocketImpl.h">
-		</Unit>
-		<Unit filename="src/AbstractHTTPRequestHandler.cpp">
-		</Unit>
-		<Unit filename="src/DatagramSocket.cpp">
-		</Unit>
-		<Unit filename="src/DatagramSocketImpl.cpp">
-		</Unit>
-		<Unit filename="src/DialogSocket.cpp">
-		</Unit>
-		<Unit filename="src/DNS.cpp">
-		</Unit>
-		<Unit filename="src/FilePartSource.cpp">
-		</Unit>
-		<Unit filename="src/FTPClientSession.cpp">
-		</Unit>
-		<Unit filename="src/FTPStreamFactory.cpp">
-		</Unit>
-		<Unit filename="src/HostEntry.cpp">
-		</Unit>
-		<Unit filename="src/HTMLForm.cpp">
-		</Unit>
-		<Unit filename="src/HTTPAuthenticationParams.cpp">
-		</Unit>
-		<Unit filename="src/HTTPBasicCredentials.cpp">
-		</Unit>
-		<Unit filename="src/HTTPBufferAllocator.cpp">
-		</Unit>
-		<Unit filename="src/HTTPChunkedStream.cpp">
-		</Unit>
-		<Unit filename="src/HTTPClientSession.cpp">
-		</Unit>
-		<Unit filename="src/HTTPCookie.cpp">
-		</Unit>
-		<Unit filename="src/HTTPCredentials.cpp">
-		</Unit>
-		<Unit filename="src/HTTPDigestCredentials.cpp">
-		</Unit>
-		<Unit filename="src/HTTPFixedLengthStream.cpp">
-		</Unit>
-		<Unit filename="src/HTTPHeaderStream.cpp">
-		</Unit>
-		<Unit filename="src/HTTPIOStream.cpp">
-		</Unit>
-		<Unit filename="src/HTTPMessage.cpp">
-		</Unit>
-		<Unit filename="src/HTTPRequest.cpp">
-		</Unit>
-		<Unit filename="src/HTTPRequestHandler.cpp">
-		</Unit>
-		<Unit filename="src/HTTPRequestHandlerFactory.cpp">
-		</Unit>
-		<Unit filename="src/HTTPResponse.cpp">
-		</Unit>
-		<Unit filename="src/HTTPServer.cpp">
-		</Unit>
-		<Unit filename="src/HTTPServerConnection.cpp">
-		</Unit>
-		<Unit filename="src/HTTPServerConnectionFactory.cpp">
-		</Unit>
-		<Unit filename="src/HTTPServerParams.cpp">
-		</Unit>
-		<Unit filename="src/HTTPServerRequest.cpp">
-		</Unit>
-		<Unit filename="src/HTTPServerRequestImpl.cpp">
-		</Unit>
-		<Unit filename="src/HTTPServerResponse.cpp">
-		</Unit>
-		<Unit filename="src/HTTPServerResponseImpl.cpp">
-		</Unit>
-		<Unit filename="src/HTTPServerSession.cpp">
-		</Unit>
-		<Unit filename="src/HTTPSession.cpp">
-		</Unit>
-		<Unit filename="src/HTTPSessionFactory.cpp">
-		</Unit>
-		<Unit filename="src/HTTPSessionInstantiator.cpp">
-		</Unit>
-		<Unit filename="src/HTTPStream.cpp">
-		</Unit>
-		<Unit filename="src/HTTPStreamFactory.cpp">
-		</Unit>
-		<Unit filename="src/ICMPClient.cpp">
-		</Unit>
-		<Unit filename="src/ICMPEventArgs.cpp">
-		</Unit>
-		<Unit filename="src/ICMPPacket.cpp">
-		</Unit>
-		<Unit filename="src/ICMPPacketImpl.cpp">
-		</Unit>
-		<Unit filename="src/ICMPSocket.cpp">
-		</Unit>
-		<Unit filename="src/ICMPSocketImpl.cpp">
-		</Unit>
-		<Unit filename="src/ICMPv4PacketImpl.cpp">
-		</Unit>
-		<Unit filename="src/IPAddress.cpp">
-		</Unit>
-		<Unit filename="src/MailMessage.cpp">
-		</Unit>
-		<Unit filename="src/MailRecipient.cpp">
-		</Unit>
-		<Unit filename="src/MailStream.cpp">
-		</Unit>
-		<Unit filename="src/MediaType.cpp">
-		</Unit>
-		<Unit filename="src/MessageHeader.cpp">
-		</Unit>
-		<Unit filename="src/MulticastSocket.cpp">
-		</Unit>
-		<Unit filename="src/MultipartReader.cpp">
-		</Unit>
-		<Unit filename="src/MultipartWriter.cpp">
-		</Unit>
-		<Unit filename="src/NameValueCollection.cpp">
-		</Unit>
-		<Unit filename="src/NetException.cpp">
-		</Unit>
-		<Unit filename="src/NetworkInterface.cpp">
-		</Unit>
-		<Unit filename="src/NullPartHandler.cpp">
-		</Unit>
-		<Unit filename="src/PartHandler.cpp">
-		</Unit>
-		<Unit filename="src/PartSource.cpp">
-		</Unit>
-		<Unit filename="src/POP3ClientSession.cpp">
-		</Unit>
-		<Unit filename="src/QuotedPrintableDecoder.cpp">
-		</Unit>
-		<Unit filename="src/QuotedPrintableEncoder.cpp">
-		</Unit>
-		<Unit filename="src/RawSocket.cpp">
-		</Unit>
-		<Unit filename="src/RawSocketImpl.cpp">
-		</Unit>
-		<Unit filename="src/RemoteSyslogChannel.cpp">
-		</Unit>
-		<Unit filename="src/RemoteSyslogListener.cpp">
-		</Unit>
-		<Unit filename="src/ServerSocket.cpp">
-		</Unit>
-		<Unit filename="src/ServerSocketImpl.cpp">
-		</Unit>
-		<Unit filename="src/SMTPClientSession.cpp">
-		</Unit>
-		<Unit filename="src/Socket.cpp">
-		</Unit>
-		<Unit filename="src/SocketAddress.cpp">
-		</Unit>
-		<Unit filename="src/SocketImpl.cpp">
-		</Unit>
-		<Unit filename="src/SocketNotification.cpp">
-		</Unit>
-		<Unit filename="src/SocketNotifier.cpp">
-		</Unit>
-		<Unit filename="src/SocketReactor.cpp">
-		</Unit>
-		<Unit filename="src/SocketStream.cpp">
-		</Unit>
-		<Unit filename="src/StreamSocket.cpp">
-		</Unit>
-		<Unit filename="src/StreamSocketImpl.cpp">
-		</Unit>
-		<Unit filename="src/StringPartSource.cpp">
-		</Unit>
-		<Unit filename="src/TCPServer.cpp">
-		</Unit>
-		<Unit filename="src/TCPServerConnection.cpp">
-		</Unit>
-		<Unit filename="src/TCPServerConnectionFactory.cpp">
-		</Unit>
-		<Unit filename="src/TCPServerDispatcher.cpp">
-		</Unit>
-		<Unit filename="src/TCPServerParams.cpp">
-		</Unit>
-		<Unit filename="src/WebSocket.cpp">
-		</Unit>
-		<Unit filename="src/WebSocketImpl.cpp">
-		</Unit>
-		<Extensions />
+		<Unit filename="include/Poco/Net/AbstractHTTPRequestHandler.h" />
+		<Unit filename="include/Poco/Net/DNS.h" />
+		<Unit filename="include/Poco/Net/DatagramSocket.h" />
+		<Unit filename="include/Poco/Net/DatagramSocketImpl.h" />
+		<Unit filename="include/Poco/Net/DialogSocket.h" />
+		<Unit filename="include/Poco/Net/FTPClientSession.h" />
+		<Unit filename="include/Poco/Net/FTPStreamFactory.h" />
+		<Unit filename="include/Poco/Net/FilePartSource.h" />
+		<Unit filename="include/Poco/Net/HTMLForm.h" />
+		<Unit filename="include/Poco/Net/HTTPAuthenticationParams.h" />
+		<Unit filename="include/Poco/Net/HTTPBasicCredentials.h" />
+		<Unit filename="include/Poco/Net/HTTPBasicStreamBuf.h" />
+		<Unit filename="include/Poco/Net/HTTPBufferAllocator.h" />
+		<Unit filename="include/Poco/Net/HTTPChunkedStream.h" />
+		<Unit filename="include/Poco/Net/HTTPClientSession.h" />
+		<Unit filename="include/Poco/Net/HTTPCookie.h" />
+		<Unit filename="include/Poco/Net/HTTPCredentials.h" />
+		<Unit filename="include/Poco/Net/HTTPDigestCredentials.h" />
+		<Unit filename="include/Poco/Net/HTTPFixedLengthStream.h" />
+		<Unit filename="include/Poco/Net/HTTPHeaderStream.h" />
+		<Unit filename="include/Poco/Net/HTTPIOStream.h" />
+		<Unit filename="include/Poco/Net/HTTPMessage.h" />
+		<Unit filename="include/Poco/Net/HTTPRequest.h" />
+		<Unit filename="include/Poco/Net/HTTPRequestHandler.h" />
+		<Unit filename="include/Poco/Net/HTTPRequestHandlerFactory.h" />
+		<Unit filename="include/Poco/Net/HTTPResponse.h" />
+		<Unit filename="include/Poco/Net/HTTPServer.h" />
+		<Unit filename="include/Poco/Net/HTTPServerConnection.h" />
+		<Unit filename="include/Poco/Net/HTTPServerConnectionFactory.h" />
+		<Unit filename="include/Poco/Net/HTTPServerParams.h" />
+		<Unit filename="include/Poco/Net/HTTPServerRequest.h" />
+		<Unit filename="include/Poco/Net/HTTPServerRequestImpl.h" />
+		<Unit filename="include/Poco/Net/HTTPServerResponse.h" />
+		<Unit filename="include/Poco/Net/HTTPServerResponseImpl.h" />
+		<Unit filename="include/Poco/Net/HTTPServerSession.h" />
+		<Unit filename="include/Poco/Net/HTTPSession.h" />
+		<Unit filename="include/Poco/Net/HTTPSessionFactory.h" />
+		<Unit filename="include/Poco/Net/HTTPSessionInstantiator.h" />
+		<Unit filename="include/Poco/Net/HTTPStream.h" />
+		<Unit filename="include/Poco/Net/HTTPStreamFactory.h" />
+		<Unit filename="include/Poco/Net/HostEntry.h" />
+		<Unit filename="include/Poco/Net/ICMPClient.h" />
+		<Unit filename="include/Poco/Net/ICMPEventArgs.h" />
+		<Unit filename="include/Poco/Net/ICMPPacket.h" />
+		<Unit filename="include/Poco/Net/ICMPPacketImpl.h" />
+		<Unit filename="include/Poco/Net/ICMPSocket.h" />
+		<Unit filename="include/Poco/Net/ICMPSocketImpl.h" />
+		<Unit filename="include/Poco/Net/ICMPv4PacketImpl.h" />
+		<Unit filename="include/Poco/Net/IPAddress.h" />
+		<Unit filename="include/Poco/Net/MailMessage.h" />
+		<Unit filename="include/Poco/Net/MailRecipient.h" />
+		<Unit filename="include/Poco/Net/MailStream.h" />
+		<Unit filename="include/Poco/Net/MediaType.h" />
+		<Unit filename="include/Poco/Net/MessageHeader.h" />
+		<Unit filename="include/Poco/Net/MulticastSocket.h" />
+		<Unit filename="include/Poco/Net/MultipartReader.h" />
+		<Unit filename="include/Poco/Net/MultipartWriter.h" />
+		<Unit filename="include/Poco/Net/NameValueCollection.h" />
+		<Unit filename="include/Poco/Net/Net.h" />
+		<Unit filename="include/Poco/Net/NetException.h" />
+		<Unit filename="include/Poco/Net/NetworkInterface.h" />
+		<Unit filename="include/Poco/Net/NullPartHandler.h" />
+		<Unit filename="include/Poco/Net/POP3ClientSession.h" />
+		<Unit filename="include/Poco/Net/PartHandler.h" />
+		<Unit filename="include/Poco/Net/PartSource.h" />
+		<Unit filename="include/Poco/Net/QuotedPrintableDecoder.h" />
+		<Unit filename="include/Poco/Net/QuotedPrintableEncoder.h" />
+		<Unit filename="include/Poco/Net/RawSocket.h" />
+		<Unit filename="include/Poco/Net/RawSocketImpl.h" />
+		<Unit filename="include/Poco/Net/RemoteSyslogChannel.h" />
+		<Unit filename="include/Poco/Net/RemoteSyslogListener.h" />
+		<Unit filename="include/Poco/Net/SMTPClientSession.h" />
+		<Unit filename="include/Poco/Net/ServerSocket.h" />
+		<Unit filename="include/Poco/Net/ServerSocketImpl.h" />
+		<Unit filename="include/Poco/Net/Socket.h" />
+		<Unit filename="include/Poco/Net/SocketAcceptor.h" />
+		<Unit filename="include/Poco/Net/SocketAddress.h" />
+		<Unit filename="include/Poco/Net/SocketConnector.h" />
+		<Unit filename="include/Poco/Net/SocketDefs.h" />
+		<Unit filename="include/Poco/Net/SocketImpl.h" />
+		<Unit filename="include/Poco/Net/SocketNotification.h" />
+		<Unit filename="include/Poco/Net/SocketNotifier.h" />
+		<Unit filename="include/Poco/Net/SocketReactor.h" />
+		<Unit filename="include/Poco/Net/SocketStream.h" />
+		<Unit filename="include/Poco/Net/StreamSocket.h" />
+		<Unit filename="include/Poco/Net/StreamSocketImpl.h" />
+		<Unit filename="include/Poco/Net/StringPartSource.h" />
+		<Unit filename="include/Poco/Net/TCPServer.h" />
+		<Unit filename="include/Poco/Net/TCPServerConnection.h" />
+		<Unit filename="include/Poco/Net/TCPServerConnectionFactory.h" />
+		<Unit filename="include/Poco/Net/TCPServerDispatcher.h" />
+		<Unit filename="include/Poco/Net/TCPServerParams.h" />
+		<Unit filename="include/Poco/Net/WebSocket.h" />
+		<Unit filename="include/Poco/Net/WebSocketImpl.h" />
+		<Unit filename="src/AbstractHTTPRequestHandler.cpp" />
+		<Unit filename="src/DNS.cpp" />
+		<Unit filename="src/DatagramSocket.cpp" />
+		<Unit filename="src/DatagramSocketImpl.cpp" />
+		<Unit filename="src/DialogSocket.cpp" />
+		<Unit filename="src/FTPClientSession.cpp" />
+		<Unit filename="src/FTPStreamFactory.cpp" />
+		<Unit filename="src/FilePartSource.cpp" />
+		<Unit filename="src/HTMLForm.cpp" />
+		<Unit filename="src/HTTPAuthenticationParams.cpp" />
+		<Unit filename="src/HTTPBasicCredentials.cpp" />
+		<Unit filename="src/HTTPBufferAllocator.cpp" />
+		<Unit filename="src/HTTPChunkedStream.cpp" />
+		<Unit filename="src/HTTPClientSession.cpp" />
+		<Unit filename="src/HTTPCookie.cpp" />
+		<Unit filename="src/HTTPCredentials.cpp" />
+		<Unit filename="src/HTTPDigestCredentials.cpp" />
+		<Unit filename="src/HTTPFixedLengthStream.cpp" />
+		<Unit filename="src/HTTPHeaderStream.cpp" />
+		<Unit filename="src/HTTPIOStream.cpp" />
+		<Unit filename="src/HTTPMessage.cpp" />
+		<Unit filename="src/HTTPRequest.cpp" />
+		<Unit filename="src/HTTPRequestHandler.cpp" />
+		<Unit filename="src/HTTPRequestHandlerFactory.cpp" />
+		<Unit filename="src/HTTPResponse.cpp" />
+		<Unit filename="src/HTTPServer.cpp" />
+		<Unit filename="src/HTTPServerConnection.cpp" />
+		<Unit filename="src/HTTPServerConnectionFactory.cpp" />
+		<Unit filename="src/HTTPServerParams.cpp" />
+		<Unit filename="src/HTTPServerRequest.cpp" />
+		<Unit filename="src/HTTPServerRequestImpl.cpp" />
+		<Unit filename="src/HTTPServerResponse.cpp" />
+		<Unit filename="src/HTTPServerResponseImpl.cpp" />
+		<Unit filename="src/HTTPServerSession.cpp" />
+		<Unit filename="src/HTTPSession.cpp" />
+		<Unit filename="src/HTTPSessionFactory.cpp" />
+		<Unit filename="src/HTTPSessionInstantiator.cpp" />
+		<Unit filename="src/HTTPStream.cpp" />
+		<Unit filename="src/HTTPStreamFactory.cpp" />
+		<Unit filename="src/HostEntry.cpp" />
+		<Unit filename="src/ICMPClient.cpp" />
+		<Unit filename="src/ICMPEventArgs.cpp" />
+		<Unit filename="src/ICMPPacket.cpp" />
+		<Unit filename="src/ICMPPacketImpl.cpp" />
+		<Unit filename="src/ICMPSocket.cpp" />
+		<Unit filename="src/ICMPSocketImpl.cpp" />
+		<Unit filename="src/ICMPv4PacketImpl.cpp" />
+		<Unit filename="src/IPAddress.cpp" />
+		<Unit filename="src/MailMessage.cpp" />
+		<Unit filename="src/MailRecipient.cpp" />
+		<Unit filename="src/MailStream.cpp" />
+		<Unit filename="src/MediaType.cpp" />
+		<Unit filename="src/MessageHeader.cpp" />
+		<Unit filename="src/MulticastSocket.cpp" />
+		<Unit filename="src/MultipartReader.cpp" />
+		<Unit filename="src/MultipartWriter.cpp" />
+		<Unit filename="src/NameValueCollection.cpp" />
+		<Unit filename="src/NetException.cpp" />
+		<Unit filename="src/NetworkInterface.cpp" />
+		<Unit filename="src/NullPartHandler.cpp" />
+		<Unit filename="src/POP3ClientSession.cpp" />
+		<Unit filename="src/PartHandler.cpp" />
+		<Unit filename="src/PartSource.cpp" />
+		<Unit filename="src/QuotedPrintableDecoder.cpp" />
+		<Unit filename="src/QuotedPrintableEncoder.cpp" />
+		<Unit filename="src/RawSocket.cpp" />
+		<Unit filename="src/RawSocketImpl.cpp" />
+		<Unit filename="src/RemoteSyslogChannel.cpp" />
+		<Unit filename="src/RemoteSyslogListener.cpp" />
+		<Unit filename="src/SMTPClientSession.cpp" />
+		<Unit filename="src/ServerSocket.cpp" />
+		<Unit filename="src/ServerSocketImpl.cpp" />
+		<Unit filename="src/Socket.cpp" />
+		<Unit filename="src/SocketAddress.cpp" />
+		<Unit filename="src/SocketImpl.cpp" />
+		<Unit filename="src/SocketNotification.cpp" />
+		<Unit filename="src/SocketNotifier.cpp" />
+		<Unit filename="src/SocketReactor.cpp" />
+		<Unit filename="src/SocketStream.cpp" />
+		<Unit filename="src/StreamSocket.cpp" />
+		<Unit filename="src/StreamSocketImpl.cpp" />
+		<Unit filename="src/StringPartSource.cpp" />
+		<Unit filename="src/TCPServer.cpp" />
+		<Unit filename="src/TCPServerConnection.cpp" />
+		<Unit filename="src/TCPServerConnectionFactory.cpp" />
+		<Unit filename="src/TCPServerDispatcher.cpp" />
+		<Unit filename="src/TCPServerParams.cpp" />
+		<Unit filename="src/WebSocket.cpp" />
+		<Unit filename="src/WebSocketImpl.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
-
