@@ -1,6 +1,7 @@
 #pragma once
 
 #ifdef _WIN32 || _WIN64
+#define _WINSOCKAPI_
 #include <Windows.h>
 #include <conio.h>
 #endif
@@ -18,6 +19,12 @@ using namespace std;
 // Display Width and Height
 #define displayX 60
 #define displayY 20
+
+// connect to the server (online game)
+void connectToServer();
+
+// host a server (online game)
+void hostServer();
 
 // puts a cursor to a given location
 void gotoxy(int x, int y);

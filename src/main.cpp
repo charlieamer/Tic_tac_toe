@@ -20,6 +20,14 @@ int main()
 			//Help
 			displayHelp();
 			break;
+		case 3:
+			//Connect
+			connectToServer();
+			break;
+		case 4:
+			//Host a server
+			hostServer();
+			break;
 		}
 	}
 }

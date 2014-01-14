@@ -21,15 +21,15 @@ int checkGame();
 // Draws game table, displaying which player is currently
 // playing, it has also option if you want to display
 // additional game info
-void drawGameTable(int playerID, bool drawInfo = true);
+void drawGameTable(int playerID, bool drawInfo = true, bool invertSign = false);
 
 // Controls game logic and input, returns which user won.
 // If it is tie, or user quit, it returns 0
-int gameBase();
+int gameBase(int mode=0);
 
 // Fires up gameBase function and displays an output of a
 // finished game (e.g. Player 1 won)
-void playGame();
+void playGame(int mode=0);
 
 // Displays the aim of this game and how to use this program
 void displayHelp();
