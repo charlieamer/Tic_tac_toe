@@ -110,15 +110,26 @@ void drawGameTable(int playerID, bool drawInfo)
 	// horizontal lines
 	for (int i = 1; i < 18; i++)
 	{
+#ifdef _WIN32 || _WIN64
 		buffer[i][4] = 205;
 		buffer[i][8] = 205;
+#else
+		buffer[i][4] = '-';
+		buffer[i][8] = '-';
+#endif // _WIN32
 	}
 	// vertical lines
 	for (int i = 1; i < 12; i++)
 	{
+#ifdef _WIN32 || _WIN64
 		buffer[6][i] = 186;
 		buffer[12][i] = 186;
+#else
+		buffer[6][i] = '|';
+		buffer[12][i] = '|';
+#endif
 	}
+#ifdef _WIN32 || _WIN64
 	// upper joints
 	buffer[6][0] = 203;
 	buffer[12][0] = 203;
@@ -136,6 +147,25 @@ void drawGameTable(int playerID, bool drawInfo)
 	buffer[6][8] = 206;
 	buffer[12][4] = 206;
 	buffer[12][8] = 206;
+#else
+	// upper joints
+	buffer[6][0] = '+';
+	buffer[12][0] = '+';
+	// bottom joints
+	buffer[6][12] = '+';
+	buffer[12][12] = '+';
+	// left joints
+	buffer[0][4] = '+';
+	buffer[0][8] = '+';
+	// right joints
+	buffer[18][4] = '+';
+	buffer[18][8] = '+';
+	// middle joints
+	buffer[6][4] = '+';
+	buffer[6][8] = '+';
+	buffer[12][4] = '+';
+	buffer[12][8] = '+';
+#endif // _WIN32
 	// current game statuses
 	int tx, ty;
 	for (int i = 0; i < 3; i++)
@@ -272,7 +302,9 @@ void displayHelp()
 	animatedText(2, 12, "You can also press Q or ESC on your", delay_speed);
 	animatedText(2, 13, "keyboard to return to previous menu.", delay_speed);
 	gotoxy(4, 15);
-	system("pause");
+	//system("pause");
+	cout << "Press any key to continue ...";
+	_getch();
 	animateWindowOut(42, 19, 10);
 }
 

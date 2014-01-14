@@ -12,11 +12,13 @@ char lastBuffer[displayX][displayY];
 /// UTILITY FUNCTIONS
 ////////////////////////////////////////////////////////////
 #pragma region utility_functions
+#ifdef _WIN32 || _WIN64
 void gotoxy(int x, int y) {
 	COORD pos = { x, y };
 	HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleCursorPosition(output, pos);
 }
+#endif
 
 void drawBuffer(int delay)
 {
@@ -24,6 +26,7 @@ void drawBuffer(int delay)
 	{
 		for (int j = 0; j < displayY; j++)
 		{
+            if (buffer[i][j] == '\0') buffer[i][j] = ' ';
 			if (buffer[i][j] == lastBuffer[i][j]) continue; // Makes drawing faster by ignoring characters that haven't changed
 			gotoxy(i, j);
 			cout << buffer[i][j];
@@ -51,20 +54,37 @@ void drawWindow(int width, int height)
 	// Upper and lower part
 	for (int i = 0; i < width; i++)
 	{
+#ifdef _WIN32 || _WIN64
 		buffer[i][0] = 205;
 		buffer[i][height - 1] = 205;
+#else
+		buffer[i][0] = '-';
+		buffer[i][height - 1] = '-';
+#endif // _WIN32
 	}
 
 	// Left and right part
 	for (int i = 0; i < height; i++)
 	{
+#ifdef _WIN32 || _WIN64
 		buffer[0][i] = 186;
 		buffer[width - 1][i] = 186;
+#else
+		buffer[0][i] = '|';
+		buffer[width - 1][i] = '|';
+#endif
 	}
+#ifdef _WIN32 || _WIN64
 	buffer[0][0] = 201;
 	buffer[0][height - 1] = 200;
 	buffer[width - 1][0] = 187;
 	buffer[width - 1][height - 1] = 188;
+#else
+	buffer[0][0] = '+';
+	buffer[0][height - 1] = '+';
+	buffer[width - 1][0] = '+';
+	buffer[width - 1][height - 1] = '+';
+#endif
 }
 
 // draws text at given coordinates

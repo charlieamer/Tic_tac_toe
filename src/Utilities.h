@@ -1,9 +1,19 @@
 #pragma once
+
+#ifdef _WIN32 || _WIN64
 #include <Windows.h>
+#include <conio.h>
+#endif
+
 #include <string>
+#include <string.h>
 #include <iostream>
+#include <stdlib.h>
 #pragma warning(disable:4309)
 using namespace std;
+#ifdef __linux__
+#include "LinuxFunctions.h"
+#endif
 
 // Display Width and Height
 #define displayX 60
