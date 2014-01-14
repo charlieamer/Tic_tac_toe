@@ -8,8 +8,8 @@
 		<Build>
 			<Target title="Debug_Windows">
 				<Option platforms="Windows;" />
-				<Option output="../exe/tic_tac_toe_mingw_Debug" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Debug/" />
+				<Option output="..\exe\tic_tac_toe_mingw_Debug" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -18,8 +18,8 @@
 			</Target>
 			<Target title="Release_Windows">
 				<Option platforms="Windows;" />
-				<Option output="../exe/tic_tac_toe_mingw_Release" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Release/" />
+				<Option output="..\exe\tic_tac_toe_mingw_Release" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -31,8 +31,8 @@
 			</Target>
 			<Target title="Debug_Linux">
 				<Option platforms="Unix;" />
-				<Option output="../exe/tic_tac_toe_linux_Debug" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Debug/" />
+				<Option output="..\exe\tic_tac_toe_linux_Debug" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -41,8 +41,8 @@
 			</Target>
 			<Target title="Release_Linux">
 				<Option platforms="Unix;" />
-				<Option output="../exe/tic_tac_toe_linux_Release" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Release/" />
+				<Option output="..\exe\tic_tac_toe_linux_Release" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -56,17 +56,26 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add option="-DPOCO_STATIC" />
+			<Add directory="..\poco-1.4.6p2\Foundation\include" />
+			<Add directory="..\poco-1.4.6p2\Net\include" />
 		</Compiler>
-		<Unit filename="../src/GameFunctions.cpp" />
-		<Unit filename="../src/GameFunctions.h" />
-		<Unit filename="../src/LinuxFunctions.cpp">
+		<Linker>
+			<Add library="PocoNetmt" />
+			<Add library="PocoFoundationmt" />
+			<Add library="ws2_32" />
+			<Add directory="..\poco-1.4.6p2\lib" />
+		</Linker>
+		<Unit filename="..\src\GameFunctions.cpp" />
+		<Unit filename="..\src\GameFunctions.h" />
+		<Unit filename="..\src\LinuxFunctions.cpp">
 			<Option target="Debug_Linux" />
 			<Option target="Release_Linux" />
 		</Unit>
-		<Unit filename="../src/LinuxFunctions.h" />
-		<Unit filename="../src/Utilities.cpp" />
-		<Unit filename="../src/Utilities.h" />
-		<Unit filename="../src/main.cpp" />
+		<Unit filename="..\src\LinuxFunctions.h" />
+		<Unit filename="..\src\Utilities.cpp" />
+		<Unit filename="..\src\Utilities.h" />
+		<Unit filename="..\src\main.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
